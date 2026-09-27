@@ -1,31 +1,30 @@
 {
   "expo": {
-    "name": "simon-dice",
-    "slug": "simon-dice-7lg31rrj2dlc8outnokw",
+    "name": "Simón Dice",
+    "slug": "simon-dice",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0f0e17"
+    },
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.tunombre.simondice"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f0e17"
       },
-      "predictiveBackGestureEnabled": false
+      "package": "com.tunombre.simondice"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "135d8d90-5d70-44e9-98c7-cc45a9bfb5e6"
-      }
-    },
-    "owner": "lunrak"
+    }
   }
 }

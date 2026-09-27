@@ -1,20 +1,36 @@
+import { useState } from 'react';
+import { StyleSheet } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import PantallaInicio from './src/screens/PantallaInicio';
+import type { EstadoJuego } from './src/types';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+	const [estado, setEstado] = useState<EstadoJuego>('inicio');
+	const [mejorPuntuacion] = useState<number>(0);
+
+	const iniciarJuego = () => {
+		setEstado('mostrando-secuencia');
+	};
+
+	return (
+		<SafeAreaProvider>
+			<SafeAreaView style={styles.container}>
+				<StatusBar style="light" />
+				{estado === 'inicio' && (
+					<PantallaInicio
+						mejorPuntuacion={mejorPuntuacion}
+						onIniciar={iniciarJuego}
+					/>
+				)}
+			</SafeAreaView>
+		</SafeAreaProvider>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+	container: {
+		flex: 1,
+		backgroundColor: '#0f0e17',
+	},
 });
