@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "simon-dice",
-    "slug": "simon-dice",
+    "slug": "simon-dice-7lg31rrj2dlc8outnokw",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,6 +20,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "135d8d90-5d70-44e9-98c7-cc45a9bfb5e6"
+      }
+    },
+    "owner": "lunrak"
   }
 }
