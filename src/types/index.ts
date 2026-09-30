@@ -1,25 +1,43 @@
-// ===== TIPOS DEL SIMÓN DICE =====
-
 export type ColorBoton = 'verde' | 'rojo' | 'amarillo' | 'azul';
 
-export type EstadoJuego = 'inicio' | 'mostrando-secuencia' | 'esperando-input' | 'game-over';
+export type EstadoJuego =
+	| 'inicio'
+	| 'mostrando-secuencia'
+	| 'esperando-input'
+	| 'game-over';
 
 export interface BotonSimon {
-  color: ColorBoton;
-  activo: boolean;
+	color: ColorBoton;
+	activo: boolean;
 }
 
 export interface EstadoSimon {
-  secuencia: ColorBoton[];
-  secuenciaUsuario: ColorBoton[];
-  puntuacion: number;
-  mejorPuntuacion: number;
-  estado: EstadoJuego;
-  botonActivo: ColorBoton | null;
+	secuencia: ColorBoton[];
+	secuenciaUsuario: ColorBoton[];
+	puntuacion: number;
+	mejorPuntuacion: number;
+	estado: EstadoJuego;
+	botonActivo: ColorBoton | null;
+}
+
+export const COLORES_DISPONIBLES: readonly ColorBoton[] = [
+	'verde',
+	'rojo',
+	'amarillo',
+	'azul',
+] as const;
+
+export const VELOCIDAD_INICIAL = 600;
+export const VELOCIDAD_MINIMA = 200;
+export const REDUCCION_POR_RONDA = 30;
+
+export function calcularVelocidad(ronda: number): number {
+	const velocidad = VELOCIDAD_INICIAL - (ronda - 1) * REDUCCION_POR_RONDA;
+	return Math.max(velocidad, VELOCIDAD_MINIMA);
 }
 
 export interface ConfiguracionJuego {
-  velocidadBase: number;      // ms de cada color al mostrar la secuencia
-  velocidadMinima: number;    // ms mínimo al que puede llegar
-  reduccionPorRonda: number;  // cuántos ms se reduce por ronda
+	velocidadBase: number;
+	velocidadMinima: number;
+	reduccionPorRonda: number;
 }

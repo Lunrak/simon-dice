@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native-async-storage/async-storage';
+import  AsyncStorage  from '@react-native-async-storage/async-storage';
 
 const CLAVE_RECORD = 'simon-record';
 export async function guardadRecord(puntuacion: number): Promise<void> {
