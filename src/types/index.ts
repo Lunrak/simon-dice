@@ -27,9 +27,9 @@ export const COLORES_DISPONIBLES: readonly ColorBoton[] = [
 	'azul',
 ] as const;
 
-export const VELOCIDAD_INICIAL = 600;
-export const VELOCIDAD_MINIMA = 200;
-export const REDUCCION_POR_RONDA = 30;
+export const VELOCIDAD_INICIAL = 700;
+export const VELOCIDAD_MINIMA = 250;
+export const REDUCCION_POR_RONDA = 20;
 
 export function calcularVelocidad(ronda: number): number {
 	const velocidad = VELOCIDAD_INICIAL - (ronda - 1) * REDUCCION_POR_RONDA;
