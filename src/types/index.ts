@@ -27,17 +27,28 @@ export const COLORES_DISPONIBLES: readonly ColorBoton[] = [
 	'azul',
 ] as const;
 
-export const VELOCIDAD_INICIAL = 700;
-export const VELOCIDAD_MINIMA = 250;
-export const REDUCCION_POR_RONDA = 20;
-
-export function calcularVelocidad(ronda: number): number {
-	const velocidad = VELOCIDAD_INICIAL - (ronda - 1) * REDUCCION_POR_RONDA;
-	return Math.max(velocidad, VELOCIDAD_MINIMA);
-}
-
 export interface ConfiguracionJuego {
 	velocidadBase: number;
 	velocidadMinima: number;
 	reduccionPorRonda: number;
+}
+
+export type Dificultad = 'facil' | 'normal' | 'dificil';
+
+export const VELOCIDADES: Record<Dificultad, ConfiguracionJuego> = {
+	facil: { velocidadBase: 800, velocidadMinima: 400, reduccionPorRonda: 20 },
+	normal: { velocidadBase: 600, velocidadMinima: 200, reduccionPorRonda: 30 },
+	dificil: { velocidadBase: 450, velocidadMinima: 150, reduccionPorRonda: 40 },
+};
+
+export const DIFICULTAD_POR_DEFECTO: Dificultad = 'normal';
+
+export function calcularVelocidad(
+	ronda: number,
+	dificultad: Dificultad,
+): number {
+	const { velocidadBase, velocidadMinima, reduccionPorRonda } =
+		VELOCIDADES[dificultad];
+	const velocidad = velocidadBase - (ronda - 1) * reduccionPorRonda;
+	return Math.max(velocidad, velocidadMinima);
 }
