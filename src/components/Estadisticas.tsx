@@ -6,7 +6,7 @@ interface EstadisticasProps {
 	ronda: number;
 }
 
-function Estadisticas({
+export function Estadisticas({
 	puntuacion,
 	mejorPuntuacion,
 	ronda,

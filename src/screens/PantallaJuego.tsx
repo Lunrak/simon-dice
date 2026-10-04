@@ -23,19 +23,19 @@ function PantallaJuego({
 	const puedeInteractuar = estado === 'esperando-input';
 
 	return (
-		<View style={StyleSheet.contenedor}>
+		<View style={styles.contenedor}>
 			<Estadisticas
-				puntuaion={puntuacion}
+				puntuacion={puntuacion}
 				mejorPuntuacion={mejorPuntuacion}
 				ronda={ronda}
 			/>
 
-			<view style={StyleSheet.mensajeContainer}>
-				<text style={StyleSheet.mensaje}>
+			<View style={styles.mensajeContainer}>
+				<Text style={styles.mensaje}>
 					{estado === 'mostrando-secuencia' && 'Observa la secuencia.'}
 					{estado === 'esperando-input' && 'Tu turno. Repite la secuencia.'}
-				</text>
-			</view>
+				</Text>
+			</View>
 
 			<Tablero
 				botonActivo={botonActivo}
