@@ -1,5 +1,4 @@
 import * as Haptics from 'expo-haptics';
-import { cache } from 'react';
 
 export async function vibrarPulsacion(): Promise<void> {
 	try {
@@ -27,11 +26,12 @@ export async function vibrarExito(): Promise<void> {
 
 export async function vibrarRecord(): Promise<void> {
 	try {
-		await Haptics.notificationAsync(Haptics.NotificationFeedback.Success);
+		await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 		await new Promise((resolve) => {
 			setTimeout(resolve, 200);
 		});
+		await Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 	} catch (error) {
-        //ignorar
-    }
+		//ignorar
+	}
 }
