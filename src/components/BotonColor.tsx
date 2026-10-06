@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
 		elevation: 8,
 	},
   brillo:{
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
   },
 	botonActivo: {
 		shadowOpacity: 0.8,
