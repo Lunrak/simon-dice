@@ -2,13 +2,13 @@ import { Audio } from 'expo-av';
 import { ColorBoton } from '../types';
 
 const SONIDOS: Record<ColorBoton, any> = {
-	verde: require('../../assets/sounds/verde.mp3'),
-	rojo: require('../../assets/sounds/rojo.mp3'),
-	amarillo: require('../../assets/sounds/amarillo.mp3'),
-	azul: require('../../assets/sounds/azul.mp3'),
+	verde: require('../../assets/sounds/verde.wav'),
+	rojo: require('../../assets/sounds/rojo.wav'),
+	amarillo: require('../../assets/sounds/amarillo.wav'),
+	azul: require('../../assets/sounds/azul.wav'),
 };
 
-const sonidosCargados: Record<ColorBoton, AudioSound | null> = {
+const sonidosCargados: Record<ColorBoton, Audio.Sound | null> = {
 	verde: null,
 	rojo: null,
 	amarillo: null,
