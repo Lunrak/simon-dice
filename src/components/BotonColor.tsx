@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, View, Animated, Platform } from 'react-native';
+import { Pressable, StyleSheet, Animated, Platform } from 'react-native';
 import { useRef, useEffect } from 'react';
 import type { ColorBoton } from '../types';
 
@@ -15,6 +15,8 @@ const COLORES: Record<ColorBoton, { base: string; activo: string }> = {
 	amarillo: { base: '#f9a825', activo: '#ffeb3b' },
 	azul: { base: '#1565c0', activo: '#2196f3' },
 };
+
+const USE_NATIVE_DRIVERS = Platform.OS !== 'web';
 
 function BotonColor({
 	color,
@@ -33,12 +35,12 @@ function BotonColor({
 				Animated.timing(escala, {
 					toValue: 0.93,
 					duration: 100,
-					useNativeDriver: true,
+					useNativeDriver: USE_NATIVE_DRIVERS,
 				}),
 				Animated.timing(opacidad, {
 					toValue: 1,
 					duration: 150,
-					useNativeDriver: true,
+					useNativeDriver: USE_NATIVE_DRIVERS,
 				}),
 			]).start();
 		} else {
@@ -46,7 +48,7 @@ function BotonColor({
 				Animated.spring(escala, {
 					toValue: 1,
 					friction: 3,
-					useNativeDriver: true,
+					useNativeDriver: USE_NATIVE_DRIVERS,
 				}),
 			]).start();
 		}
@@ -84,12 +86,12 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		borderWidth: 4,
 		borderColor: '#0f0e17',
-		shadowColor: '#000',
 		...Platform.select({
 			web: {
-				boxShadow: '0px 4px 5px rgba(0,0,0,0.3',
+				boxShadow: '0px 4px 5px rgba(0,0,0,0.3)',
 			},
 			default: {
+				shadowColor: '#000',
 				shadowOffset: { width: 0, height: 4 },
 				shadowOpacity: 0.3,
 				shadowRadius: 5,
