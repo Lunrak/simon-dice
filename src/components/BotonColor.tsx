@@ -59,33 +59,29 @@ function BotonColor({
 			onPress={() => onPress(color)}
 			disabled={disabled}
 			style={[
-				styles.boton,
+				styles.sombra,
 				{
-					backgroundColor: colores.base,
 					transform: [{ scale: escala }],
 					opacity: disabled && !activo ? 0.5 : 1,
 				},
 			]}
 		>
-			<Animated.View
-				style={[
-					styles.brillo,
-					{ backgroundColor: colores.activo, opacity: opacidad },
-				]}
-			></Animated.View>
+			<Animated.View style={[styles.boton, { backgroundColor: colores.base }]}>
+				<Animated.View
+					style={[
+						styles.brillo,
+						{ backgroundColor: colores.activo, opacity: opacidad },
+					]}
+				/>
+			</Animated.View>
 		</Pressable>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-	},
-	boton: {
+	sombra: {
 		flex: 1,
 		borderRadius: 20,
-		borderWidth: 4,
-		borderColor: '#0f0e17',
 		...Platform.select({
 			web: {
 				boxShadow: '0px 4px 5px rgba(0,0,0,0.3)',
@@ -99,8 +95,19 @@ const styles = StyleSheet.create({
 			},
 		}),
 	},
+	container: {
+		flex: 1,
+	},
+	boton: {
+		flex: 1,
+		borderRadius: 20,
+		borderWidth: 4,
+		borderColor: '#0f0e17',
+		overflow: 'hidden',
+	},
 	brillo: {
 		...StyleSheet.absoluteFill,
+		borderRadius: 20,
 	},
 	botonActivo: {
 		shadowOpacity: 0.8,

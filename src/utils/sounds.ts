@@ -40,7 +40,7 @@ export async function reproducirSonido(color: ColorBoton): Promise<void> {
 		const sound = sonidosCargados[color];
 		if (sound) {
 			sound.seekTo(0);
-			sound?.play();
+			sound.play();
 		}
 	} catch (error) {
 		//ignorar
