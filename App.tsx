@@ -9,10 +9,22 @@ import { esperar, obtenerAleatorio } from './src/utils/utils';
 import { guardarRecord, leerRecord } from './src/utils/storage';
 import {
 	COLORES_DISPONIBLES,
+	DIFICULTAD_POR_DEFECTO,
 	calcularVelocidad,
 	type ColorBoton,
 	type EstadoJuego,
 } from './src/types';
+import {
+	vibrarPulsacion,
+	vibrarError,
+	vibrarExito,
+	vibrarRecord,
+} from './src/utils/haptics';
+import {
+	precargarSonidos,
+	reproducirSonido,
+	liberarSonidos,
+} from './src/utils/sounds';
 
 export default function App() {
 	const [estado, setEstado] = useState<EstadoJuego>('inicio');
@@ -25,7 +37,15 @@ export default function App() {
 
 	const ejecucionActual = useRef(0);
 
-	// ===== CARGAR RÉCORD AL INICIAR =====
+	useEffect(() => {
+		precargarSonidos();
+
+		return () => {
+			liberarSonidos();
+		};
+	}, []);
+
+	// cargar puntos al iniciar
 	useEffect(() => {
 		async function cargar() {
 			const record = await leerRecord();
@@ -34,12 +54,15 @@ export default function App() {
 		cargar();
 	}, []);
 
-	// ===== MOSTRAR SECUENCIA CUANDO EL ESTADO LO PIDE =====
+	// Mostrar secuencia
 	useEffect(() => {
 		if (estado !== 'mostrando-secuencia') return;
 
 		const idEjecucion = ++ejecucionActual.current;
-		const velocidad = calcularVelocidad(secuencia.length);
+		const velocidad = calcularVelocidad(
+			secuencia.length,
+			DIFICULTAD_POR_DEFECTO,
+		);
 
 		async function mostrar() {
 			// Pausa inicial antes de empezar
@@ -50,6 +73,7 @@ export default function App() {
 				if (ejecucionActual.current !== idEjecucion) return;
 
 				setBotonActivo(color);
+				reproducirSonido(color);
 				await esperar(velocidad);
 				if (ejecucionActual.current !== idEjecucion) return;
 
@@ -63,13 +87,11 @@ export default function App() {
 
 		mostrar();
 
-		// Cleanup: invalida esta ejecución si cambia el estado
+		// Cleanup
 		return () => {
 			ejecucionActual.current++;
 		};
 	}, [estado, secuencia]);
-
-	// ===== ACCIONES =====
 
 	const iniciarJuego = () => {
 		const primeraSecuencia = [obtenerAleatorio(COLORES_DISPONIBLES)];
@@ -83,11 +105,14 @@ export default function App() {
 	const manejarPressBoton = (color: ColorBoton) => {
 		if (estado !== 'esperando-input') return;
 
+		vibrarPulsacion();
+
 		const nuevaSecuenciaUsuario = [...secuenciaUsuario, color];
 		const indiceActual = nuevaSecuenciaUsuario.length - 1;
 
 		// ¿Falló?
 		if (secuencia[indiceActual] !== color) {
+			vibrarError();
 			finalizarJuego();
 			return;
 		}
@@ -95,10 +120,11 @@ export default function App() {
 		// ¿Completó la ronda?
 		if (nuevaSecuenciaUsuario.length === secuencia.length) {
 			// Ronda superada
+			vibrarExito();
 			setSecuenciaUsuario([]);
 			setPuntuacion((prev) => prev + 1);
 
-			// Nueva ronda: añadir un color
+			// Nueva ronda
 			const nuevaSecuencia = [
 				...secuencia,
 				obtenerAleatorio(COLORES_DISPONIBLES),
@@ -118,6 +144,7 @@ export default function App() {
 		if (puntuacion > mejorPuntuacion) {
 			setMejorPuntuacion(puntuacion);
 			setNuevoRecord(true);
+			vibrarRecord();
 			await guardarRecord(puntuacion);
 		}
 	};
@@ -135,7 +162,7 @@ export default function App() {
 		setNuevoRecord(false);
 	};
 
-	// ===== RENDER =====
+	// Render
 	return (
 		<SafeAreaProvider>
 			<SafeAreaView style={styles.container}>

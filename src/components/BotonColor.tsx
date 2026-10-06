@@ -78,7 +78,7 @@ function BotonColor({
 const styles = StyleSheet.create({
   container:{
     flex:1
-  }
+  },
 	boton: {
 		flex: 1,
 		borderRadius: 20,
