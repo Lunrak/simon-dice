@@ -105,6 +105,7 @@ export default function App() {
 	const manejarPressBoton = (color: ColorBoton) => {
 		if (estado !== 'esperando-input') return;
 
+		reproducirSonido(color);
 		vibrarPulsacion();
 
 		const nuevaSecuenciaUsuario = [...secuenciaUsuario, color];

@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, View, Animated } from 'react-native';
+import { Pressable, StyleSheet, View, Animated, Platform } from 'react-native';
 import { useRef, useEffect } from 'react';
 import type { ColorBoton } from '../types';
 
@@ -76,27 +76,35 @@ function BotonColor({
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1
-  },
+	container: {
+		flex: 1,
+	},
 	boton: {
 		flex: 1,
 		borderRadius: 20,
 		borderWidth: 4,
 		borderColor: '#0f0e17',
 		shadowColor: '#000',
-		shadowOffset: { width: 0, height: 4 },
-		shadowOpacity: 0.3,
-		shadowRadius: 5,
-		elevation: 8,
+		...Platform.select({
+			web: {
+				boxShadow: '0px 4px 5px rgba(0,0,0,0.3',
+			},
+			default: {
+				shadowOffset: { width: 0, height: 4 },
+				shadowOpacity: 0.3,
+				shadowRadius: 5,
+				elevation: 8,
+			},
+		}),
 	},
-  brillo:{
-    ...StyleSheet.absoluteFill,
-  },
+	brillo: {
+		...StyleSheet.absoluteFill,
+	},
 	botonActivo: {
 		shadowOpacity: 0.8,
 		shadowRadius: 15,
 		elevation: 15,
+		borderRadius: 20,
 	},
 });
 

@@ -28,7 +28,8 @@
           "imageWidth": 200,
           "resizeMode": "contain"
         }
-      ]
+      ],
+      "expo-audio"
     ],
     "extra": {
       "eas": {
