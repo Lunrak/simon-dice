@@ -1,40 +1,38 @@
 {
-  "expo": {
-    "name": "Simón Dice",
-    "slug": "simon-dice",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.tunombre.simondice"
-    },
-    "android": {
-      "package": "com.tunombre.simondice"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      [
-        "expo-splash-screen",
-        {
-          "backgroundColor": "0f0e17",
-          "image": "./assets/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain"
-        }
-      ],
-      "expo-audio"
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "14a6295a-b125-40b0-bb68-ea64da34ac4d"
-      }
-    }
-  }
+	"expo": {
+		"name": "Simón Dice",
+		"slug": "simon-dice",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "./assets/icon.png",
+		"userInterfaceStyle": "dark",
+		"assetBundlePatterns": ["**/*"],
+		"ios": {
+			"supportsTablet": true,
+			"bundleIdentifier": "com.tunombre.simondice"
+		},
+		"android": {
+			"package": "com.tunombre.simondice"
+		},
+		"web": {
+			"favicon": "./assets/favicon.png"
+		},
+		"plugins": [
+			[
+				"expo-splash-screen",
+				{
+					"backgroundColor": "#0f0e17",
+					"image": "./assets/splash-icon.png",
+					"imageWidth": 200,
+					"resizeMode": "contain"
+				}
+			],
+			"expo-audio"
+		],
+		"extra": {
+			"eas": {
+				"projectId": "14a6295a-b125-40b0-bb68-ea64da34ac4d"
+			}
+		}
+	}
 }
